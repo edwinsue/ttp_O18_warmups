@@ -1,4 +1,4 @@
--- CASE WHEN - the if/else statements of SQL! It's litterally the same as if/else that we've seen in python
+-- CASE WHEN - the if/else statements of SQL! It's literally the same as if/else that we've seen in python
 -- and excel, but different syntax:
 -- CASE
 -- WHEN (condition) THEN <output>
@@ -30,4 +30,18 @@
 -- you can get your CASE WHEN statement to work, THEN see if you can put it all together with softcoding 
 -- (using a CTE/subquery to return the number - eg. 1.99)
 
--- CHECK OUT THE HINTS FILE IF YOU GET STUCK
+WITH PG_13_films AS (
+	SELECT * 
+	FROM film
+	WHERE rating = 'PG-13'
+)
+
+SELECT 
+title,
+CASE 
+WHEN (rental_rate = 0.99) THEN '0.10'
+ELSE (rental_rate = 1.99) THEN '1.00'
+ELSE (rental_rate = 2.99) THEN '2.00'
+ELSE (rental_rate = 3.99) THEN '3.00'
+END AS promotional_rate
+FROM PG_13_films
